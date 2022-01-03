@@ -95,6 +95,9 @@ TextureImporter:
   - first:
       213: -7503008079389545076
     second: Wood_sword
+  - first:
+      213: -7566632554201152900
+    second: Shield
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -842,6 +845,27 @@ TextureImporter:
       bones: []
       spriteID: c8da91987e5ffd790800000000000000
       internalID: -7503008079389545076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shield
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 16
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c720fec18cbedf690800000000000000
+      internalID: -7566632554201152900
       vertices: []
       indices: 
       edges: []
