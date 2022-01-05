@@ -8,11 +8,13 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Vector3 moveDelta; //Difference between current position and where you want to be.
     private RaycastHit2D hit; //Checks if we are allowed to go there or not
+    AudioSource audioSrc;
 
     // Start is called before the first frame update
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        audioSrc = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -29,6 +31,21 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = Vector3.one;
         else if (moveDelta.x < 0)
             transform.localScale = new Vector3(-1, 1, 0);
+
+        if (moveDelta.x != 0 || moveDelta.y != 0)
+        {
+            if (!audioSrc.isPlaying)
+            {
+                audioSrc.Play();
+            }
+        } else
+            audioSrc.Stop();
+
+        if (moveDelta.x != 0 && moveDelta.y != 0)
+        {
+            moveDelta.x *= 0.7f;
+            moveDelta.y *= 0.7f;
+        }
 
         //Make sure we can move in the direction, by casting a box there first. If box returns null, we can move
         hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
