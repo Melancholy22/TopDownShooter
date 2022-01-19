@@ -16,18 +16,18 @@ public class GunScript : MonoBehaviour
     Vector2 mousePos;
     Vector3 scale;
 
-    private void Update()
+    private void OnGUI()//Update()
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         scale = beep.transform.localScale;
-        if (beep.transform.localScale.x < 0)
+        /*if (beep.transform.localScale.x < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
         else
         {
             transform.localScale = Vector3.one;
-        }
+        }*/
     }
 
     // Start is called before the first frame update
