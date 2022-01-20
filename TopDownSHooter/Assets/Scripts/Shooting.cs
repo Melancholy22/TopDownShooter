@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+public class Shooting : Collidable
 {
     [SerializeField]
     private GameObject bulletPre;
@@ -11,9 +11,14 @@ public class Shooting : MonoBehaviour
     private Transform firePoint;
 
     [SerializeField]
-    private float bulletVel = 20f;
+    private float bulletVel;
 
     private Animator anim;
+    public int damagePoint = 1;
+
+    //Swing
+    private float cooldown = 0.5f;
+    private float lastSwing;
 
     private void Start()
     {
@@ -28,7 +33,11 @@ public class Shooting : MonoBehaviour
         }
         else if(Input.GetButtonDown("Fire2"))
         {
-            Swing();
+            if (Time.time - lastSwing > cooldown) //Cooldown for swinging
+            {
+                lastSwing = Time.time;
+                Swing();
+            }
         }
     }
     
