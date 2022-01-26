@@ -8,6 +8,7 @@ public class Collidable : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Collider2D[] hits = new Collider2D[10]; //Maximum of 10 different thing can be collided with
 
+
     protected virtual void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();

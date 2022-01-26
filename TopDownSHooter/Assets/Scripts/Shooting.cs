@@ -16,16 +16,18 @@ public class Shooting : Collidable
     private Animator anim;
     public int damagePoint = 1;
 
-    //Swing
+    //Swing stats
     private float cooldown = 0.5f;
     private float lastSwing;
+    private float pushForce = 1;
 
-    private void Start()
+    private new void Start()
     {
+        base.Start(); // Needed for OnCollide function
         anim = GetComponent<Animator>(); 
     }
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         if(Input.GetButtonDown("Fire1"))
         {
@@ -39,6 +41,7 @@ public class Shooting : Collidable
                 Swing();
             }
         }
+        base.Update(); //Needed for the OnCollide method to work
     }
     
     void Shoot()
@@ -51,5 +54,23 @@ public class Shooting : Collidable
     void Swing()
     {
         anim.SetTrigger("Swing");
+    }
+
+    protected override void OnCollide(Collider2D coll)
+    {
+        if (coll.tag == "Fighter")
+        {
+            if (coll.name != "player")
+            {
+                //Debug.Log(coll.name);
+                Damage dmg = new Damage //Sends the data the the damage structure
+                {
+                    damageAmount = damagePoint,
+                    origin = transform.position,
+                    pushForce = pushForce
+                };
+                coll.SendMessage("ReceiveDamage", dmg);
+            }
+        }
     }
 }
